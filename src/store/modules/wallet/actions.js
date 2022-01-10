@@ -11,8 +11,8 @@ import router from "@/router";
 //     });
 // };
 
-export const getWallet = ({ commit }, cId) => {
-  Wallet.show(cId)
+export const getWallet = ({ commit }, customerId) => {
+  Wallet.show(customerId)
     .then((response) => {
       commit("SET_WALLET", {
         data: response.data.data,
