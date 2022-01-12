@@ -22,6 +22,10 @@ export const SET_OTP = (state, opt) => {
   state.opt_code = opt;
 };
 
+export const SET_TOKEN = (state, token) => {
+  state.token = token;
+};
+
 export const SET_PAGINATION = (state, users) => {
   state.users = users;
 };

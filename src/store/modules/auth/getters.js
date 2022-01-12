@@ -14,6 +14,10 @@ export const otp = (state) => {
   return state.opt_code;
 };
 
+export const token = (state) => {
+  return state.token;
+};
+
 export const authenticated = (state) => {
   return state.authenticated;
 };

@@ -4,7 +4,7 @@
       <template v-slot:modalHeader>
         <h5 class="modal-title text-uppercase" id="transLabel">
           <img
-            src="@/assets/logo.png"
+            src="@/assets/aaj-logo.png"
             alt="AAJ-Express"
             width="40px"
             class="img-fluid"
@@ -421,7 +421,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "Rate",
+  name: "GetRate",
   components: { Modal },
   data() {
     return {

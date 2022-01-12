@@ -14,6 +14,7 @@
         <span class="px-4"></span>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-6 col-md-8 col-sm-12 m-auto mb-5">
         <div class="card border-0 shadow">
@@ -380,16 +381,13 @@
                         </option>
                       </template>
                       <template v-else>
-                        <option :value="`${shipmentType.origin.id}`">
-                          {{ shipmentType.origin.name }}
-                        </option>
-                        <!-- <option
+                        <option
                           :value="`${country.id}`"
-                          v-for="country in countries.data"
+                          v-for="country in shipmentType.destination"
                           :key="country.id"
                         >
                           {{ country.name }}
-                        </option> -->
+                        </option>
                       </template>
                     </select>
                     <div
@@ -542,7 +540,7 @@
 
                     <button
                       type="button"
-                      class="btn btn-md btn-danger btn-custom"
+                      class="btn btn-sm btn-danger btn-custom"
                       @click="removeRow(row)"
                     >
                       <i class="fa fa-trash"></i>
@@ -722,7 +720,7 @@
                       </h1>
                       <h6>{{ rate ? rate.weight : "" }}KG</h6>
                       <p class="card-text mb-3">
-                        Rates and courier availablilty are based on your
+                        Rates and courier availability are based on your
                         specified route and estimated weight
                       </p>
                     </div>
@@ -746,7 +744,7 @@
               </div>
 
               <div v-show="step === 6">
-                <h4 class="my-3">Summary & Payment</h4>
+                <h5 class="my-3">Summary & Payment</h5>
 
                 <div class="card">
                   <div class="card-body">
@@ -758,14 +756,14 @@
                       </h1>
                       <h6>{{ rate ? rate.weight : "" }}KG</h6>
                       <p class="card-text">
-                        Rates and courier availablilty are based on your
+                        Rates and courier availability are based on your
                         specified route and estimated weight
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div class="summary grid-sm grid-md my-3">
+                <div class="summary grid-sm grid-md my-4">
                   <details>
                     <summary>Origin</summary>
                     <p>
@@ -825,7 +823,7 @@
                   </details>
                 </div>
 
-                <h3>Select Service Type</h3>
+                <h5>Select Service Type</h5>
                 <div class="grid grid-sm">
                   <div class="form-check">
                     <label for="service1" class="form-check-label">
@@ -918,7 +916,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
-  name: "Transaction",
+  name: "UserTransaction",
 
   data() {
     return {
@@ -999,9 +997,8 @@ export default {
 
     submitForm() {
       this.submitted = true;
-
-      this.$v.$touch();
-      if (this.$v.$invalid) return;
+      this.$v.form.policy.$touch();
+      if (this.$v.form.$invalid) return;
 
       this.form.customerId = this.user.id;
       this.form.price = this.rate.price;
@@ -1060,9 +1057,13 @@ export default {
       this.step--;
     },
     next(req) {
-      this.$v.form.$touch();
-
       if (this.step === 1) {
+        this.$v.form.senderName.$touch();
+        this.$v.form.senderPhone.$touch();
+        this.$v.form.senderEmail.$touch();
+        this.$v.form.originatingCountry.$touch();
+        this.$v.form.originatingStreet.$touch();
+        this.$v.form.originatingState.$touch();
         if (
           this.$v.form.senderName.$invalid ||
           this.$v.form.senderPhone.$invalid ||
@@ -1078,6 +1079,12 @@ export default {
       }
 
       if (this.step === 2) {
+        this.$v.form.receiverName.$touch();
+        this.$v.form.receiverPhone.$touch();
+        this.$v.form.receiverEmail.$touch();
+        this.$v.form.destinationCountry.$touch();
+        this.$v.form.destinationStreet.$touch();
+        this.$v.form.destinationState.$touch();
         if (
           this.$v.form.receiverName.$invalid ||
           this.$v.form.receiverPhone.$invalid ||
@@ -1129,8 +1136,11 @@ export default {
         amount: "",
       });
     },
-    removeRow: function (row) {
-      this.form.descriptions.splice(row, 1);
+    removeRow: function (index) {
+      this.form.descriptions.splice(
+        this.form.descriptions.findIndex((e) => e === index),
+        1
+      );
     },
   },
 

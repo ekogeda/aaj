@@ -287,19 +287,6 @@ export default {
       if (this.$v.$invalid) return;
 
       this.addUser(this.user);
-      this.reset();
-    },
-
-    reset() {
-      this.user = {
-        firstName: "",
-        lastName: "",
-        country: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-      };
     },
   },
 

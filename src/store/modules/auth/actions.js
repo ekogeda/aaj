@@ -94,7 +94,7 @@ export const addUser = ({ commit, dispatch }, formData) => {
       router.push({ name: "VerifyAccount" });
       dispatch(
         "addNotification",
-        { type: "success", message: `${response.data.data} 😊`, count: 0 },
+        { type: "success", message: `${response.data.message} 😊`, count: 0 },
         { root: true }
       );
     })
@@ -125,13 +125,6 @@ export const confirmAccount = ({ commit, dispatch }, formData) => {
           { type: "success", message: `${response.data.message} 😊`, count: 0 },
           { root: true }
         );
-      } else {
-        router.push({ name: "Login" });
-        dispatch(
-          "addNotification",
-          { type: "success", message: `${response.data.data} 😊`, count: 0 },
-          { root: true }
-        );
       }
     })
     .catch((error) => {
@@ -154,11 +147,12 @@ export const passwordReset = ({ commit, dispatch }, formData) => {
     .then((response) => {
       commit("SET_USER_ERROR", []);
       commit("SET_CURRENT_USER_EMAIL", response.data.email);
+      commit("SET_TOKEN", response.data.token);
 
-      router.push({ name: "ResetPassword" });
+      router.push({ name: "Login" });
       dispatch(
         "addNotification",
-        { type: "success", message: `${response.data.data} 😊`, count: 0 },
+        { type: "success", message: `${response.data.message} 😊`, count: 0 },
         { root: true }
       );
     })

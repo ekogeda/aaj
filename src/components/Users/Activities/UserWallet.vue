@@ -310,12 +310,12 @@ export default {
     },
   },
 
-  created() {
-    this.getWallet(this.user.id);
-  },
-
   mounted() {
-    $("#walletDataTable").DataTable();
+    this.getWallet(this.user.id);
+
+    setTimeout(() => {
+      $("#walletDataTable").DataTable();
+    }, 2000);
   },
 
   validations() {

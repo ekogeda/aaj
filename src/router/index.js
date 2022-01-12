@@ -12,14 +12,14 @@ const Dashboard = () =>
     /* webpackChunkName: "dashboard" */ "@/components/Users/Dashboard.vue"
   );
 
-const Transaction = () =>
+const UserTransaction = () =>
   import(
-    /* webpackChunkName: "transaction" */ "@/components/Users/Activities/Transaction.vue"
+    /* webpackChunkName: "user-transaction" */ "@/components/Users/Activities/UserTransaction.vue"
   );
 
-const Rate = () =>
+const GetRate = () =>
   import(
-    /* webpackChunkName: "rate" */ "@/components/Users/Activities/Rate.vue"
+    /* webpackChunkName: "get-rate" */ "@/components/Users/Activities/GetRate.vue"
   );
 
 const Order = () =>
@@ -59,9 +59,9 @@ const VerifyAccount = () =>
 const Profile = () =>
   import(/* webpackChunkName: "profile" */ "@/components/Users/Profile.vue");
 
-const Track = () =>
+const TrackTrans = () =>
   import(
-    /* webpackChunkName: "track" */ "@/components/Users/Activities/Track.vue"
+    /* webpackChunkName: "track-trans" */ "@/components/Users/Activities/TrackTrans.vue"
   );
 
 const UserSetting = () =>
@@ -207,7 +207,7 @@ const routes = [
   {
     path: "/track",
     name: "Track",
-    component: Track,
+    component: TrackTrans,
     meta: {
       title: "Track | AAJExpress",
       transitionName: "fade",
@@ -262,7 +262,7 @@ const routes = [
       {
         path: "transaction",
         name: "user.transaction",
-        component: Transaction,
+        component: UserTransaction,
         // props: true,
         meta: {
           title: "Transaction | AAJExpress",
@@ -282,7 +282,7 @@ const routes = [
       {
         path: "rate",
         name: "user.rate",
-        component: Rate,
+        component: GetRate,
         meta: {
           title: "Rate | AAJExpress",
           transitionName: "fade",
