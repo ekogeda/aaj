@@ -4,6 +4,5 @@ export default {
   user: null,
   email: null,
   opt_code: null,
-  token: null,
   errors: [],
 };

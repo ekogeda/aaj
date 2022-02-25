@@ -4,7 +4,7 @@
       <template v-slot:modalHeader>
         <h5 class="modal-title text-uppercase" id="transLabel">
           <img
-            src="@/assets/aaj-logo.png"
+            src="@/assets/logo.png"
             alt="AAJ-Express"
             width="40px"
             class="img-fluid"
@@ -131,7 +131,12 @@
 
                     <div v-if="form.shipment == 2">
                       <div
-                        class="animate__animated animate__fadeIn my-4 bg-light p-2"
+                        class="
+                          animate__animated animate__fadeIn
+                          my-4
+                          bg-light
+                          p-2
+                        "
                       >
                         <div class="form-check">
                           <label class="form-check-label">
@@ -421,7 +426,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "GetRate",
+  name: "Rate",
   components: { Modal },
   data() {
     return {

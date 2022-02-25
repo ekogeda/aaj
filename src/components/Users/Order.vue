@@ -152,9 +152,7 @@
                     class="d-flex justify-content-between align-items-center"
                   >
                     <h6 class="mb-0 fw-normal">
-                      All Orders ({{
-                        transactions ? transactions.length : "0"
-                      }})
+                      All Orders ({{ transactions.status.requests }})
                     </h6>
 
                     <router-link
@@ -169,14 +167,14 @@
 
                   <div class="table-responsive my-5">
                     <table
-                      class="table table-hover table-inverse"
+                      class="table table-borderless table-striped table-hover align-middle"
                       id="orderDataTable"
                     >
                       <thead class="thead-inverse">
                         <tr>
                           <th scope="col">Waybill No</th>
                           <th scope="col">Date</th>
-                          <th scope="col">Name</th>
+                          <th scope="col">Received By</th>
                           <th scope="col">Mobile</th>
                           <th scope="col">Origin</th>
                           <th scope="col">Destination</th>
@@ -187,8 +185,31 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="trans in transactions" :key="trans.id">
-                          <th scope="row">{{ trans.waybill_no }}</th>
+                        <tr v-for="trans in transactions.data" :key="trans.id">
+                          <td title="copy">
+                            <a
+                              href="#!"
+                              class="me-2"
+                              v-clipboard:copy="trans.waybill_no"
+                              v-clipboard:success="onCopyStatus"
+                              v-clipboard:error="onCopyError"
+                            >
+                              <i class="bi bi-clipboard">{{
+                                trans.waybill_no
+                              }}</i>
+                            </a>
+                            <span
+                              class="text-muted"
+                              v-if="copySucceeded == true"
+                              >Copied!</span
+                            >
+                            <span
+                              class="text-muted"
+                              v-if="copySucceeded == false"
+                            >
+                              Press CTRL+C to copy.
+                            </span>
+                          </td>
                           <td>{{ formatDate(trans.created_at) }}</td>
                           <td>
                             {{ trans.d_first_name + " " + trans.d_last_name }}
@@ -196,7 +217,7 @@
                           <td>{{ trans.d_phone }}</td>
                           <td>{{ trans.o_address }}</td>
                           <td>{{ trans.d_address }}</td>
-                          <td>{{ trans.weight }}</td>
+                          <td class="text-center">{{ trans.weight }}</td>
                           <td>
                             {{ new Intl.NumberFormat().format(trans.price) }}
                           </td>
@@ -304,7 +325,7 @@
                   </thead>
 
                   <tbody>
-                    <tr v-for="detail in transaction" :key="detail.id">
+                    <tr v-for="detail in transaction.data" :key="detail.id">
                       <td>{{ detail.description }}</td>
                       <td>{{ detail.quantity }}</td>
                       <td>{{ detail.weight }}</td>
@@ -331,14 +352,14 @@
 import Sidebar from "@/components/Users/Sidebar.vue";
 import { mapGetters, mapActions } from "vuex";
 import { required, helpers } from "vuelidate/lib/validators";
+import moment from "moment";
 import "jquery/dist/jquery.min.js";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
-import moment from "moment";
 
 export default {
-  name: "Order",
+  name: "UserOrder",
 
   components: { Sidebar },
 
@@ -351,6 +372,7 @@ export default {
       },
 
       isBigScreen: false,
+      copySucceeded: null,
     };
   },
 
@@ -371,8 +393,22 @@ export default {
 
     ...mapActions("auth", ["logoutUser"]),
 
+    onCopyStatus() {
+      this.copySucceeded = true;
+      setTimeout(() => {
+        this.copySucceeded = null;
+      }, 3000);
+    },
+    onCopyError() {
+      this.copySucceeded = false;
+    },
+
     logout() {
       this.logoutUser({ aksi: "logout" });
+    },
+
+    formatDate: function (params) {
+      return moment(params).format("MMM. Do, YYYY");
     },
 
     submitRequest() {
@@ -391,10 +427,6 @@ export default {
         alert("Form successfully submitted.");
         console.log(this.form);
       }
-    },
-
-    formatDate: function (params) {
-      return moment(params).format("MMM. Do, YYYY");
     },
 
     openDetail: function (waybill) {

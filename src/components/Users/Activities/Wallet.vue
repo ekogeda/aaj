@@ -129,7 +129,7 @@
                       :to="{ name: 'user.topupwallet' }"
                       class="btn btn-sm btn-primary d-flex align-items-center"
                     >
-                      <span class="bi bi-piggy-bank"></span>
+                      <span class="bi bi-piggy-bank fs-5"></span>
                       <span class="d-none d-sm-inline-block ms-1"
                         >Fund wallet</span
                       >
@@ -239,7 +239,7 @@ import $ from "jquery";
 import moment from "moment";
 
 export default {
-  name: "UserWallet",
+  name: "CustomerWallet",
 
   components: { Sidebar },
 
@@ -283,7 +283,7 @@ export default {
         alert("Form successfully submitted.");
         console.log(this.form);
       } else {
-        alert("Please fill out all the required field..!");
+        // alert("Please fill out all the required field..!");
       }
     },
 
@@ -310,12 +310,12 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.getWallet(this.user.id);
+  },
 
-    setTimeout(() => {
-      $("#walletDataTable").DataTable();
-    }, 2000);
+  mounted() {
+    $("#walletDataTable").DataTable();
   },
 
   validations() {

@@ -17,7 +17,7 @@ export const getSingleTransaction = ({ commit }, waybillNo) => {
       if (response.data.data.status) {
         commit("SET_TRACKING", response.data.data);
       } else {
-        commit("SET_TRANSACTION", response.data.data);
+        commit("SET_TRANSACTION", response.data);
       }
     })
     .catch((error) => {

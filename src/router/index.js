@@ -7,27 +7,27 @@ const Home = () => import(/* webpackChunkName: "home" */ "@/views/Home.vue");
 
 const User = () => import(/* webpackChunkName: "user" */ "@/views/User.vue");
 
-const Dashboard = () =>
+const UserDashboard = () =>
   import(
     /* webpackChunkName: "dashboard" */ "@/components/Users/Dashboard.vue"
   );
 
-const UserTransaction = () =>
+const CustomerTransaction = () =>
   import(
-    /* webpackChunkName: "user-transaction" */ "@/components/Users/Activities/UserTransaction.vue"
+    /* webpackChunkName: "customer-transaction" */ "@/components/Users/Activities/Transaction.vue"
   );
 
-const GetRate = () =>
+const Rate = () =>
   import(
-    /* webpackChunkName: "get-rate" */ "@/components/Users/Activities/GetRate.vue"
+    /* webpackChunkName: "rate" */ "@/components/Users/Activities/Rate.vue"
   );
 
-const Order = () =>
+const UserOrder = () =>
   import(/* webpackChunkName: "order" */ "@/components/Users/Order.vue");
 
-const UserWallet = () =>
+const CustomerWallet = () =>
   import(
-    /* webpackChunkName: "user-wallet" */ "@/components/Users/Activities/UserWallet.vue"
+    /* webpackChunkName: "customer-wallet" */ "@/components/Users/Activities/Wallet.vue"
   );
 
 const TopUpWallet = () =>
@@ -59,15 +59,13 @@ const VerifyAccount = () =>
 const Profile = () =>
   import(/* webpackChunkName: "profile" */ "@/components/Users/Profile.vue");
 
-const TrackTrans = () =>
+const Track = () =>
   import(
-    /* webpackChunkName: "track-trans" */ "@/components/Users/Activities/TrackTrans.vue"
+    /* webpackChunkName: "track" */ "@/components/Users/Activities/Track.vue"
   );
 
-const UserSetting = () =>
-  import(
-    /* webpackChunkName: "setting" */ "@/components/Users/UserSetting.vue"
-  );
+const Setting = () =>
+  import(/* webpackChunkName: "setting" */ "@/components/Users/Setting.vue");
 
 Vue.use(VueRouter);
 
@@ -207,7 +205,7 @@ const routes = [
   {
     path: "/track",
     name: "Track",
-    component: TrackTrans,
+    component: Track,
     meta: {
       title: "Track | AAJExpress",
       transitionName: "fade",
@@ -253,7 +251,7 @@ const routes = [
       {
         path: "",
         name: "user.dashboard",
-        component: Dashboard,
+        component: UserDashboard,
         meta: {
           title: "User | Dashboard - AAJExpress",
           transitionName: "fade",
@@ -262,7 +260,7 @@ const routes = [
       {
         path: "transaction",
         name: "user.transaction",
-        component: UserTransaction,
+        component: CustomerTransaction,
         // props: true,
         meta: {
           title: "Transaction | AAJExpress",
@@ -282,7 +280,7 @@ const routes = [
       {
         path: "rate",
         name: "user.rate",
-        component: GetRate,
+        component: Rate,
         meta: {
           title: "Rate | AAJExpress",
           transitionName: "fade",
@@ -301,7 +299,7 @@ const routes = [
       {
         path: "order",
         name: "user.order",
-        component: Order,
+        component: UserOrder,
         meta: {
           title: "Order | AAJExpress",
           transitionName: "fade",
@@ -320,18 +318,18 @@ const routes = [
       {
         path: "wallet",
         name: "user.wallet",
-        component: UserWallet,
+        component: CustomerWallet,
         meta: {
           title: "Wallet | AAJExpress",
           transitionName: "fade",
           metaTags: [
             {
               name: "description",
-              content: "The user wallet's page of AAJExpress.",
+              content: "The wallet's page of AAJExpress.",
             },
             {
               property: "og:description",
-              content: "The user wallet's page of AAJExpress.",
+              content: "The wallet's page of AAJExpress.",
             },
           ],
         },
@@ -377,18 +375,18 @@ const routes = [
       {
         path: "setting",
         name: "user.setting",
-        component: UserSetting,
+        component: Setting,
         meta: {
           title: "Setting | AAJExpress",
           transitionName: "fade",
           metaTags: [
             {
               name: "description",
-              content: "The user setting's page of AAJExpress.",
+              content: "The setting's page of AAJExpress.",
             },
             {
               property: "og:description",
-              content: "The user setting's page of AAJExpress.",
+              content: "The setting's page of AAJExpress.",
             },
           ],
         },

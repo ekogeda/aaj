@@ -1,6 +1,6 @@
-// export const wallets = (state) => {
-//   return state.wallets;
-// };
+export const wallets = (state) => {
+  return state.wallets;
+};
 
 export const wallet = (state) => {
   return state.wallet;

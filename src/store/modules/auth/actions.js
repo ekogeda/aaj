@@ -43,7 +43,6 @@ export const loginUser = ({ commit, dispatch }, formData) => {
         commit("SET_USER_ERROR", error.response.data.errors);
 
         router.push({ name: "VerifyAccount" });
-
         dispatch(
           "addNotification",
           {
@@ -90,7 +89,8 @@ export const addUser = ({ commit, dispatch }, formData) => {
     .then((response) => {
       commit("SET_USER_ERROR", []);
       commit("SET_OTP", response.data.otp);
-      commit("SET_CURRENT_USER_EMAIL", response.data.data);
+      commit("SET_CURRENT_USER_EMAIL", response.data.email);
+
       router.push({ name: "VerifyAccount" });
       dispatch(
         "addNotification",
@@ -120,9 +120,18 @@ export const confirmAccount = ({ commit, dispatch }, formData) => {
 
       if (response.data.message) {
         commit("SET_OTP", response.data.otp);
+        router.push({ name: "Login" });
+
         dispatch(
           "addNotification",
           { type: "success", message: `${response.data.message} 😊`, count: 0 },
+          { root: true }
+        );
+      } else {
+        router.push({ name: "Login" });
+        dispatch(
+          "addNotification",
+          { type: "success", message: `${response.data.data} 😊`, count: 0 },
           { root: true }
         );
       }
@@ -147,7 +156,6 @@ export const passwordReset = ({ commit, dispatch }, formData) => {
     .then((response) => {
       commit("SET_USER_ERROR", []);
       commit("SET_CURRENT_USER_EMAIL", response.data.email);
-      commit("SET_TOKEN", response.data.token);
 
       router.push({ name: "Login" });
       dispatch(

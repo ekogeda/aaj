@@ -224,7 +224,13 @@
                     </div>
 
                     <div
-                      class="d-flex justify-content-between align-items-center fs-sm mb-3"
+                      class="
+                        d-flex
+                        justify-content-between
+                        align-items-center
+                        fs-sm
+                        mb-3
+                      "
                     >
                       <div class="form-check">
                         <input

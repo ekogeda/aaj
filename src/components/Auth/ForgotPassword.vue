@@ -44,9 +44,7 @@
                 </button>
 
                 <p class="my-3 text-start">
-                  <router-link :to="{ name: 'Login' }"
-                    >Back to login</router-link
-                  >
+                  <router-link :to="{ name: 'Login' }">Back to login</router-link>
                 </p>
               </div>
             </div>

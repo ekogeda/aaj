@@ -127,14 +127,16 @@
               </div>
 
               <div class="row g-3 my-4 comp">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-4">
                   <div class="card shadow border-0 h-100">
                     <div
                       class="card-body d-flex justify-content-between align-items-center"
                     >
                       <div class="text">
                         <p class="card-text text-secondary">All Orders</p>
-                        <h6 class="card-title">50</h6>
+                        <h6 class="card-title">
+                          {{ transactions.status.requests }}
+                        </h6>
                       </div>
                       <img
                         src="/img/aaj-files/comp1.png"
@@ -145,14 +147,14 @@
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                   <div class="card shadow border-0 h-100">
                     <div
                       class="card-body d-flex justify-content-between align-items-center"
                     >
                       <div class="text">
                         <p class="card-text text-secondary">Process</p>
-                        <h6 class="card-title">50</h6>
+                        <h6 class="card-title">{{ transactions.status.pending}}</h6>
                       </div>
                       <img
                         src="/img/aaj-files/comp2.png"
@@ -161,16 +163,18 @@
                       />
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-4">
                   <div class="card shadow border-0 h-100">
                     <div
                       class="card-body d-flex justify-content-between align-items-center"
                     >
                       <div class="text">
                         <p class="card-text text-secondary">Pending</p>
-                        <h6 class="card-title">50</h6>
+                        <h6 class="card-title">
+                          {{ transactions.status.pending }}
+                        </h6>
                       </div>
                       <img
                         src="/img/aaj-files/comp3.png"
@@ -181,17 +185,19 @@
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-4">
                   <div class="card shadow border-0 h-100">
                     <div
                       class="card-body d-flex justify-content-between align-items-center"
                     >
                       <div class="text">
                         <p class="card-text text-secondary">Delivered</p>
-                        <h6 class="card-title">50</h6>
+                        <h6 class="card-title">
+                          {{ transactions.status.delivered }}
+                        </h6>
                       </div>
                       <img
-                        src="/img/aaj-files/comp4.png"
+                        src="/img/aaj-files/comp2.png"
                         class="img-fluid"
                         alt="components"
                       />
@@ -201,7 +207,7 @@
               </div>
 
               <div class="row g-3 my-4">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-7 col-sm-12">
                   <div class="card shadow border-0 h-100">
                     <div class="card-body">
                       <h5 class="card-title">Transactions</h5>
@@ -215,35 +221,94 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-5 col-sm-12">
                   <div class="card shadow border-0 h-100">
                     <div class="card-body">
-                      <h5 class="card-title">Recent shipments</h5>
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-4"
+                      >
+                        <h5 class="card-title mb-0">Recent shipments</h5>
+                        <router-link :to="{ name: 'user.order' }"
+                          >View all</router-link
+                        >
+                      </div>
+
                       <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table
+                          class="table table-borderless table-striped table-hover align-middle trans"
+                        >
                           <thead>
                             <tr>
                               <th scope="col">#</th>
                               <th scope="col">Tracking ID</th>
-                              <th scope="col">Name</th>
+                              <th scope="col">Requested</th>
                               <th scope="col">Status</th>
-                              <th scope="col">Option</th>
+                              <th scope="col">Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr v-for="trans in transactions" :key="trans.id">
-                              <th scope="row">1</th>
-                              <td>{{ trans.waybill_no }}</td>
-                              <td>{{ user.first_name }}</td>
+                            <tr
+                              v-for="(trans, index) in transactions.transact"
+                              :key="trans.id"
+                            >
+                              <th scope="row">{{ ++index }}</th>
+                              <td title="copy">
+                                <a
+                                  href="#!"
+                                  class="me-2"
+                                  v-clipboard:copy="trans.waybill_no"
+                                  v-clipboard:success="onCopyStatus"
+                                  v-clipboard:error="onCopyError"
+                                >
+                                  <i class="bi bi-clipboard">{{
+                                    trans.waybill_no
+                                  }}</i>
+                                </a>
+                                <span
+                                  class="text-muted"
+                                  v-if="copySucceeded == true"
+                                  >Copied!</span
+                                >
+                                <span
+                                  class="text-muted"
+                                  v-if="copySucceeded == false"
+                                >
+                                  Press CTRL+C to copy.
+                                </span>
+                              </td>
+                              <td>{{ formatDate(trans.created_at) }}</td>
                               <td>
-                                <span class="p-1 rounded delivered">
-                                  Processing
+                                <span v-switch="trans.status" class="fw-normal">
+                                  <span
+                                    class="p-1 badge text-light bg-warning"
+                                    v-case="'1'"
+                                  >
+                                    Pending
+                                  </span>
+                                  <span
+                                    class="p-1 badge text-light bg-aaj"
+                                    v-case="'4'"
+                                  >
+                                    In-progress
+                                  </span>
+                                  <span
+                                    class="p-1 badge text-light delivered"
+                                    v-case="'9'"
+                                  >
+                                    Delivered
+                                  </span>
+                                  <span
+                                    class="p-1 badge text-light bg-secondary"
+                                    v-case="'4'"
+                                  >
+                                    Cancelled
+                                  </span>
                                 </span>
                               </td>
                               <td>
                                 <router-link
                                   :to="{ name: 'Track' }"
-                                  class="p-1 rounded text-light bg-aaj text-decoration-none"
+                                  class="p-1 badge text-light bg-aaj text-decoration-none"
                                 >
                                   Track
                                 </router-link>
@@ -307,15 +372,17 @@
 
 <script>
 import Sidebar from "@/components/Users/Sidebar.vue";
+import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "Dashboard",
+  name: "UserDashboard",
 
   components: { Sidebar },
 
   data() {
     return {
+      copySucceeded: null,
       series: [
         {
           name: "Transactions",
@@ -354,7 +421,8 @@ export default {
         ],
       },
 
-      seriesD: [44, 17, 15],
+      statusD: null,
+      seriesD: [30, 40, 45],
       chartOptions: {
         legend: {
           show: true,
@@ -392,6 +460,7 @@ export default {
         labels: ["Pending", "Delivered", "Cancelled"],
       },
 
+      statusR1: null,
       seriesR1: [70],
       chartOptionsR1: {
         chart: {
@@ -408,6 +477,7 @@ export default {
         labels: ["Paid Bills"],
       },
 
+      statusR2: null,
       seriesR2: [20],
       chartOptionsR2: {
         chart: {
@@ -446,6 +516,53 @@ export default {
     ...mapActions("auth", ["logoutUser"]),
     ...mapActions("transaction", ["getTransactions"]),
 
+    updateBarChart() {
+      const max = 90;
+      const min = 20;
+      const newData = this.series[0].data.map(() => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      });
+      this.series = [
+        {
+          data: newData,
+        },
+      ];
+    },
+
+    updatePieChart() {
+      this.statusD = [
+        this.transactions.status.pending,
+        this.transactions.status.delivered,
+        this.transactions.status.cancelled,
+      ];
+      this.seriesD = this.statusD.map((status) => status);
+    },
+
+    updateRadialR1() {
+      this.statusR1 = [this.transactions.status.delivered];
+      this.seriesR1 = this.statusR1.map((status) => status);
+    },
+
+    updateRadialR2() {
+      this.statusR2 = [this.transactions.status.pending];
+      this.seriesR2 = this.statusR2.map((status) => status);
+    },
+
+    formatDate: function (params) {
+      return moment(params).format("MMM. Do, YYYY");
+    },
+
+    onCopyStatus() {
+      this.copySucceeded = true;
+      setTimeout(() => {
+        this.copySucceeded = null;
+      }, 3000);
+    },
+
+    onCopyError() {
+      this.copySucceeded = false;
+    },
+
     getRandomInt() {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     },
@@ -462,6 +579,10 @@ export default {
 
   created() {
     this.getTransactions(this.user.id);
+    this.updateBarChart();
+    this.updatePieChart();
+    this.updateRadialR1();
+    this.updateRadialR2();
   },
 };
 </script>
@@ -473,6 +594,11 @@ export default {
 .w-custom {
   width: 75%;
 }
+
+:is(th, td, td > button) {
+  font-size: 12px;
+}
+
 .pending {
   background: hsl(3, 100%, 81%);
   color: #ff7875;

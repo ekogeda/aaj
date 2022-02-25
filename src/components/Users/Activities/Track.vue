@@ -87,7 +87,7 @@
 
                 <button
                   type="button"
-                  class="btn btn-sm btn-primary d-block m-auto"
+                  class="btn btn-primary d-block m-auto"
                   @click.prevent="trackOrder"
                 >
                   Track
@@ -106,7 +106,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "TrackTrans",
+  name: "Track",
 
   data() {
     return {

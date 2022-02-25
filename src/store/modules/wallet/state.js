@@ -7,5 +7,5 @@ export default {
     close: () => {
       console.log("Closed payment portal (-_-)!");
     },
-  }, 
+  },
 };

@@ -51,7 +51,7 @@ export default {
   z-index: 2;
 }
 
-.btn-primary:focus {
+.btn-primary:focus{
   box-shadow: none;
 }
 </style>

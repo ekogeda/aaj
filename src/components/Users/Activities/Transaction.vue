@@ -14,7 +14,6 @@
         <span class="px-4"></span>
       </div>
     </div>
-
     <div class="row">
       <div class="col-lg-6 col-md-8 col-sm-12 m-auto mb-5">
         <div class="card border-0 shadow">
@@ -375,18 +374,18 @@
                       <option value="" disabled selected>
                         -select country-
                       </option>
-                      <template v-if="shipmentType.origin.id == 233">
-                        <option :value="`${shipmentType.destination.id}`">
-                          {{ shipmentType.destination.name }}
+                      <template v-if="shipmentType.origin.id == 161">
+                        <option
+                          :value="`${dest.id}`"
+                          v-for="dest in shipmentType.destination"
+                          :key="dest.id"
+                        >
+                          {{ dest.name }}
                         </option>
                       </template>
                       <template v-else>
-                        <option
-                          :value="`${country.id}`"
-                          v-for="country in shipmentType.destination"
-                          :key="country.id"
-                        >
-                          {{ country.name }}
+                        <option :value="`${shipmentType.destination.id}`">
+                          {{ shipmentType.destination.name }}
                         </option>
                       </template>
                     </select>
@@ -540,7 +539,7 @@
 
                     <button
                       type="button"
-                      class="btn btn-sm btn-danger btn-custom"
+                      class="btn btn-md btn-danger btn-custom"
                       @click="removeRow(row)"
                     >
                       <i class="fa fa-trash"></i>
@@ -624,8 +623,22 @@
                 </div>
 
                 <h3 class="mt-1">Apply Insurance</h3>
-                <div class="grid grid-sm">
+                <div class="grid-sm">
                   <div class="form-check">
+                    <p>
+                      <label class="form-check-label" for="insured3">
+                        None
+                      </label>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="insured"
+                        id="insured3"
+                        value="0"
+                        v-model.trim.lazy="form.insured"
+                      />
+                    </p>
+
                     <label class="form-check-label" for="insured1">
                       Standard
                     </label>
@@ -641,9 +654,7 @@
                       Insures your eligible shipments at a value of N10,000 for
                       no additional cost
                     </p>
-                  </div>
 
-                  <div class="form-check">
                     <label class="form-check-label" for="insured2">
                       Extended
                     </label>
@@ -661,18 +672,6 @@
                       insurance cover of N200,000 or shipped entirely at the
                       sender's risk
                     </p>
-
-                    <label class="form-check-label" for="insured3">
-                      None
-                    </label>
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="insured"
-                      id="insured3"
-                      value="0"
-                      v-model.trim.lazy="form.insured"
-                    />
                   </div>
                 </div>
 
@@ -699,16 +698,15 @@
                   <div class="card">
                     <div class="card-body text-center">
                       <h5 class="card-title text-center">
+                        {{ rate.originState[0] }} ({{ rate.originState[1] }}) |
                         {{ rate.originCountry[0] }} ({{
                           rate.originCountry[1]
-                        }}) | {{ rate.originState[0] }} ({{
-                          rate.originState[1]
                         }})
                       </h5>
                       <p class="card-text">TO</p>
                       <h5 class="card-title">
-                        {{ rate.destCountry[0] }} ({{ rate.destCountry[1] }}) |
-                        {{ rate.destState[0] }} ({{ rate.destState[1] }})
+                        {{ rate.destState[0] }} ({{ rate.destState[1] }}) |
+                        {{ rate.destCountry[0] }} ({{ rate.destCountry[1] }})
                       </h5>
                     </div>
                     <hr />
@@ -744,7 +742,7 @@
               </div>
 
               <div v-show="step === 6">
-                <h5 class="my-3">Summary & Payment</h5>
+                <h4 class="my-3">Summary & Payment</h4>
 
                 <div class="card">
                   <div class="card-body">
@@ -763,9 +761,14 @@
                   </div>
                 </div>
 
-                <div class="summary grid-sm grid-md my-4">
+                <div class="summary grid-sm grid-md my-3">
                   <details>
-                    <summary>Origin</summary>
+                    <summary>
+                      <span
+                        class="border-0 border-danger border-bottom"
+                        >Origin</span
+                      >
+                    </summary>
                     <p>
                       <strong>Sender Name:</strong>
                       <samp>{{ form.senderName }}</samp>
@@ -795,7 +798,12 @@
                   </details>
 
                   <details>
-                    <summary>Destination</summary>
+                    <summary>
+                      <span
+                        class="border-0 border-danger border-bottom"
+                        >Destination</span
+                      >
+                    </summary>
                     <p>
                       <strong>Receiver Name:</strong>
                       <samp>{{ form.receiverName }}</samp>
@@ -823,7 +831,7 @@
                   </details>
                 </div>
 
-                <h5>Select Service Type</h5>
+                <h3>Select Service Type</h3>
                 <div class="grid grid-sm">
                   <div class="form-check">
                     <label for="service1" class="form-check-label">
@@ -916,7 +924,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
-  name: "UserTransaction",
+  name: "CustomerTransaction",
 
   data() {
     return {
@@ -997,8 +1005,9 @@ export default {
 
     submitForm() {
       this.submitted = true;
-      this.$v.form.policy.$touch();
-      if (this.$v.form.$invalid) return;
+
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
 
       this.form.customerId = this.user.id;
       this.form.price = this.rate.price;
@@ -1031,7 +1040,6 @@ export default {
     },
 
     saveToDraft: function (e) {
-      console.dir(e.target.checked);
       let isChecked = e.target.checked;
 
       if (isChecked) {
@@ -1057,13 +1065,9 @@ export default {
       this.step--;
     },
     next(req) {
+      // this.$v.form.$touch();
+
       if (this.step === 1) {
-        this.$v.form.senderName.$touch();
-        this.$v.form.senderPhone.$touch();
-        this.$v.form.senderEmail.$touch();
-        this.$v.form.originatingCountry.$touch();
-        this.$v.form.originatingStreet.$touch();
-        this.$v.form.originatingState.$touch();
         if (
           this.$v.form.senderName.$invalid ||
           this.$v.form.senderPhone.$invalid ||
@@ -1072,6 +1076,12 @@ export default {
           this.$v.form.originatingStreet.$invalid ||
           this.$v.form.originatingState.$invalid
         ) {
+          this.$v.form.senderName.$touch();
+          this.$v.form.senderPhone.$touch();
+          this.$v.form.senderEmail.$touch();
+          this.$v.form.originatingCountry.$touch();
+          this.$v.form.originatingStreet.$touch();
+          this.$v.form.originatingState.$touch();
           return false;
         } else {
           return (this.step = 2);
@@ -1079,12 +1089,6 @@ export default {
       }
 
       if (this.step === 2) {
-        this.$v.form.receiverName.$touch();
-        this.$v.form.receiverPhone.$touch();
-        this.$v.form.receiverEmail.$touch();
-        this.$v.form.destinationCountry.$touch();
-        this.$v.form.destinationStreet.$touch();
-        this.$v.form.destinationState.$touch();
         if (
           this.$v.form.receiverName.$invalid ||
           this.$v.form.receiverPhone.$invalid ||
@@ -1093,6 +1097,12 @@ export default {
           this.$v.form.destinationStreet.$invalid ||
           this.$v.form.destinationState.$invalid
         ) {
+          this.$v.form.receiverName.$touch();
+          this.$v.form.receiverPhone.$touch();
+          this.$v.form.receiverEmail.$touch();
+          this.$v.form.destinationCountry.$touch();
+          this.$v.form.destinationStreet.$touch();
+          this.$v.form.destinationState.$touch();
           return false;
         } else {
           return (this.step = 3);
@@ -1101,6 +1111,7 @@ export default {
 
       if (this.step === 6) {
         if (this.$v.form.policy.$invalid) {
+          this.$v.form.policy.$touch();
           return false;
         }
       }
@@ -1136,11 +1147,8 @@ export default {
         amount: "",
       });
     },
-    removeRow: function (index) {
-      this.form.descriptions.splice(
-        this.form.descriptions.findIndex((e) => e === index),
-        1
-      );
+    removeRow: function (row) {
+      this.form.descriptions.splice(row, 1);
     },
   },
 
@@ -1157,11 +1165,11 @@ export default {
       this.form.destinationStreet = this.draft.destinationStreet;
     }
 
-    if (this.countries && this.countries.data.length > 0) {
-      return;
-    } else {
-      this.getCountries();
-    }
+    // if (this.countries && this.countries.data.length > 0) {
+    //   return;
+    // } else {
+    this.getCountries();
+    // }
   },
 
   mounted() {

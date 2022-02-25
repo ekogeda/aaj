@@ -285,7 +285,6 @@ export default {
 
       this.$v.$touch();
       if (this.$v.$invalid) return;
-
       this.addUser(this.user);
     },
   },

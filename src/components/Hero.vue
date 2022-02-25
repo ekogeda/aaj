@@ -187,7 +187,15 @@
               <div class="grid-2">
                 <div class="position-relative" style="width: 50px">
                   <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-aaj"
+                    class="
+                      position-absolute
+                      top-0
+                      start-100
+                      translate-middle
+                      badge
+                      rounded-pill
+                      bg-aaj
+                    "
                     style="
                       font-size: 7px;
                       left: 80% !important;
@@ -259,7 +267,7 @@ a.text-aaj {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.btn-primary:focus {
+.btn-primary:focus{
   box-shadow: none;
 }
 @media (min-width: 320px) {

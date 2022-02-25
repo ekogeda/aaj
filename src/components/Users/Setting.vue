@@ -21,7 +21,12 @@
                   </button>
 
                   <button
-                    class="btn btn-outline-primary shadow-none border-0 d-lg-none"
+                    class="
+                      btn btn-outline-primary
+                      shadow-none
+                      border-0
+                      d-lg-none
+                    "
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#dashboardSide"
@@ -34,7 +39,14 @@
               </nav>
 
               <a
-                class="text-decoration-none text-dark text-center bg-light fw-bold d-inline-block p-2 rounded"
+                class="
+                  text-decoration-none text-dark text-center
+                  bg-light
+                  fw-bold
+                  d-inline-block
+                  p-2
+                  rounded
+                "
                 style="width: 150px"
                 href="#"
                 >Settings</a
@@ -141,7 +153,7 @@
                 </div>
               </div>
 
-              <div class="w-custom m-auto">
+              <div class="w-75 m-auto">
                 <div class="card shadow border-0 bg-light">
                   <div class="card-body">
                     <p class="card-text text-center">
@@ -193,7 +205,12 @@
                         </p>
 
                         <div
-                          class="d-flex justify-content-between align-items-center ms-5"
+                          class="
+                            d-flex
+                            justify-content-between
+                            align-items-center
+                            ms-5
+                          "
                         >
                           <a href="#" class="text-decoration-none text-primary"
                             >Edit</a
@@ -237,7 +254,12 @@
           <div class="modal-body">
             <form>
               <div class="mb-3 col-md-12">
-                <textarea id="update-address" class="form-control"></textarea>
+                <textarea
+                  id="update-address"
+                  cols="30"
+                  rows="10"
+                  class="form-control"
+                ></textarea>
               </div>
             </form>
           </div>
@@ -497,7 +519,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 
 export default {
-  name: "UserSetting",
+  name: "Setting",
 
   components: { Sidebar },
 
@@ -636,7 +658,7 @@ aside {
 }
 
 .w-custom {
-  width: 70%;
+  width: 30%;
 }
 
 .card-custom {
@@ -728,19 +750,11 @@ label {
   .sm-viewport {
     flex-direction: column;
   }
-
-  .w-custom {
-    width: 100%;
-  }
 }
 
 @media (min-width: 640px) {
   .big-screen {
     padding-left: 15rem;
-  }
-
-  .w-custom {
-    width: 70%;
   }
 }
 

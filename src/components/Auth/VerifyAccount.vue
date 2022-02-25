@@ -105,11 +105,11 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) return;
 
-      this.confirmAccount({ email: this.email, isOtp: true });
+      this.confirmAccount({ email: this.email, isOtp: this.confirmOtp });
     },
 
     resendOtp() {
-      this.confirmAccount({ resend: true, email: this.email });
+      this.confirmAccount({ resend: 1, email: this.email });
     },
   },
 
