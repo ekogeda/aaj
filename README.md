@@ -1,11 +1,11 @@
 # AAJExpress
 AAJ Express is a  trusted logistics service provider that offer doorstep delivery not only to all states within Nigeria but also worldwide.
 
-## Screenshots
+## Screenshot
 ![alt text](https://aajexpress.org/img/logo.8b58c5d8.png)
-![Screenshot](nest.png)
+<!-- ![Screenshot](nest.png) -->
 ![Screenshot](iPad.png)
-![Screenshot](iPhone.png)
+<!-- ![Screenshot](iPhone.png) -->
 
 ## Project setup
 ```
