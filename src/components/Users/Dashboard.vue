@@ -210,7 +210,7 @@
                         <h5 class="card-title mb-0">Recent shipments</h5>
                         <router-link
                           :to="{ name: 'Track' }"
-                          class="p-1 badge text-light bg-aaj text-decoration-none"
+                          class="p-2 badge text-light bg-aaj text-decoration-none"
                         >
                           Track
                         </router-link>
@@ -414,7 +414,7 @@ export default {
     ...mapActions("transaction", ["getTransactions"]),
 
     formatDate: function (params) {
-      return moment(params).format("MMM. Do, YYYY");
+      return moment(params).format("MMM. Do");
     },
 
     onCopyStatus() {
