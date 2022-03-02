@@ -281,7 +281,7 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
-        console.log(this.form);
+        // console.log(this.form);
       } else {
         // alert("Please fill out all the required field..!");
       }
@@ -291,7 +291,7 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
-        console.log(this.form);
+        // console.log(this.form);
       }
     },
 

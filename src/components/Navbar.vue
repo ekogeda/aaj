@@ -69,12 +69,7 @@
             </template>
             <template v-else>
               <div
-                class="
-                  d-flex
-                  justify-content-center
-                  align-items-center
-                  d-none d-lg-block
-                "
+                class="d-flex justify-content-center align-items-center d-none d-lg-block"
               >
                 <router-link
                   :to="{ name: 'user.dashboard' }"
@@ -97,7 +92,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "Navbar",
+  name: "HomeNavbar",
 
   computed: {
     ...mapGetters({

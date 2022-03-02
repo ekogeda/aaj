@@ -17,7 +17,7 @@
                     aria-controls="dashboardSide"
                     @click.prevent="toggled"
                   >
-                    <span class="bi bi-list"></span>
+                    <i class="bi bi-list"></i>
                   </button>
                   <a class="navbar-brand" href="#">Orders</a>
 
@@ -29,7 +29,7 @@
                     aria-controls="dashboardSide"
                     @click.prevent="toggled"
                   >
-                    <span class="bi bi-list"></span>
+                    <i class="bi bi-list"></i>
                   </button>
 
                   <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -159,13 +159,26 @@
                       :to="{ name: 'user.transaction' }"
                       class="btn btn-sm btn-primary"
                     >
-                      <span class="bi bi-plus"></span>
+                      <i class="bi bi-plus"></i>
                       Create
                       <span class="d-none d-sm-inline-block">New Order</span>
                     </router-link>
                   </div>
 
                   <div class="table-responsive my-5">
+                    <div
+                      class="toast border-0 m-auto mb-3"
+                      :class="{ fade: copySucceeded, show: copySucceeded }"
+                      role="alert"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                      style="font-size: 0.7rem; width: 80px"
+                    >
+                      <div class="toast-body text-center p-2">
+                        <span class="text-muted"> Copied! </span>
+                      </div>
+                    </div>
+
                     <table
                       class="table table-borderless table-striped table-hover align-middle"
                       id="orderDataTable"
@@ -194,21 +207,8 @@
                               v-clipboard:success="onCopyStatus"
                               v-clipboard:error="onCopyError"
                             >
-                              <i class="bi bi-clipboard">{{
-                                trans.waybill_no
-                              }}</i>
+                              {{ trans.waybill_no }}
                             </a>
-                            <span
-                              class="text-muted"
-                              v-if="copySucceeded == true"
-                              >Copied!</span
-                            >
-                            <span
-                              class="text-muted"
-                              v-if="copySucceeded == false"
-                            >
-                              Press CTRL+C to copy.
-                            </span>
                           </td>
                           <td>{{ formatDate(trans.created_at) }}</td>
                           <td>
@@ -222,18 +222,34 @@
                             {{ new Intl.NumberFormat().format(trans.price) }}
                           </td>
                           <td v-switch="trans.status">
+                            <span v-case="'0'" class="badge text-warning">
+                              <i class="bi bi-circle-fill"></i> Pending
+                            </span>
                             <span v-case="'1'" class="badge text-warning">
-                              <span class="bi bi-circle-fill"></span> Pending
+                              <i class="bi bi-circle-fill"></i> Pending
                             </span>
                             <span v-case="'2'" class="badge text-primary">
-                              <span class="bi bi-circle-fill"></span>
+                              <i class="bi bi-circle-fill"></i>
                               In-progress
                             </span>
                             <span v-case="'3'" class="badge text-success">
-                              <span class="bi bi-circle-fill"></span> Delivered
+                              <i class="bi bi-circle-fill"></i> Delivered
                             </span>
-                            <span v-case="'4'" class="badge text-danger">
-                              <span class="bi bi-circle-fill"></span> Returned
+                            <span v-case="'4'" class="badge text-aaj">
+                              <i class="bi bi-circle-fill"></i>
+                              In-progress
+                            </span>
+                            <span v-case="'5'" class="badge text-info">
+                              <i class="bi bi-circle-fill"></i> Not Available
+                            </span>
+                            <span v-case="'6'" class="badge text-danger">
+                              <i class="bi bi-circle-fill"></i> Cancelled
+                            </span>
+                            <span v-case="'7'" class="badge text-dark">
+                              <i class="bi bi-circle-fill"></i> Returned
+                            </span>
+                            <span v-case="'9'" class="badge text-success">
+                              <i class="bi bi-circle-fill"></i> Delivered
                             </span>
                           </td>
 
@@ -245,7 +261,7 @@
                               data-bs-target="#viewOrder"
                               @click="openDetail(trans.waybill_no)"
                             >
-                              <span class="bi bi-eye"></span>
+                              <i class="bi bi-eye"></i>
                             </button>
 
                             <!-- <div class="btn-group">
@@ -254,7 +270,7 @@
                                 type="button"
                                 data-bs-toggle="dropdown"
                               >
-                                <span class="bi bi-three-dots-vertical"></span>
+                                <i class="bi bi-three-dots-vertical"></i>
                               </button>
                               <div
                                 class="
@@ -269,11 +285,11 @@
                                   data-bs-target="#viewOrder"
                                   @click="openDetail(trans.waybill_no)"
                                 >
-                                  <span class="bi bi-eye"></span>
+                                  <i class="bi bi-eye"></i>
                                   View
                                 </a>
                                 <a class="dropdown-item text-warning" href="#">
-                                  <span class="bi bi-pencil-square"></span>
+                                  <i class="bi bi-pencil-square"></i>
                                   Edit
                                 </a>
                               </div>
@@ -415,7 +431,7 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
-        console.log(this.form);
+        // console.log(this.form);
       } else {
         // alert("Please fill out all the required field..!");
       }
@@ -425,7 +441,7 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
-        console.log(this.form);
+        // console.log(this.form);
       }
     },
 

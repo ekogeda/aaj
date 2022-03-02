@@ -34,10 +34,16 @@
                         >Status</span
                       >
                       <h6 v-switch="tracked.status" class="fw-normal">
+                        <span v-case="'0'"> New Shipment </span>
                         <span v-case="'1'"> Pending </span>
-                        <span v-case="'2'"> In-progress </span>
-                        <span v-case="'3'"> Delivered </span>
-                        <span v-case="'4'"> Returned </span>
+                        <span v-case="'2'"> Decline </span>
+                        <span v-case="'3'"> Processing </span>
+                        <span v-case="'4'"> In-progress </span>
+                        <span v-case="'5'"> Not Available </span>
+                        <span v-case="'6'"> Cancelled </span>
+                        <span v-case="'7'"> Returned </span>
+                        <span v-case="'8'"> At Destination </span>
+                        <span v-case="'9'"> Shipment Delivered </span>
                       </h6>
                     </li>
                     <li
@@ -106,7 +112,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "Track",
+  name: "OrderTrack",
 
   data() {
     return {

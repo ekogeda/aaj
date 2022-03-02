@@ -21,12 +21,7 @@
                   </button>
 
                   <button
-                    class="
-                      btn btn-outline-primary
-                      shadow-none
-                      border-0
-                      d-lg-none
-                    "
+                    class="btn btn-outline-primary shadow-none border-0 d-lg-none"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#dashboardSide"
@@ -39,14 +34,7 @@
               </nav>
 
               <a
-                class="
-                  text-decoration-none text-dark text-center
-                  bg-light
-                  fw-bold
-                  d-inline-block
-                  p-2
-                  rounded
-                "
+                class="text-decoration-none text-dark text-center bg-light fw-bold d-inline-block p-2 rounded"
                 style="width: 150px"
                 href="#"
                 >Settings</a
@@ -205,12 +193,7 @@
                         </p>
 
                         <div
-                          class="
-                            d-flex
-                            justify-content-between
-                            align-items-center
-                            ms-5
-                          "
+                          class="d-flex justify-content-between align-items-center ms-5"
                         >
                           <a href="#" class="text-decoration-none text-primary"
                             >Edit</a
@@ -519,7 +502,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 
 export default {
-  name: "Setting",
+  name: "UserSetting",
 
   components: { Sidebar },
 

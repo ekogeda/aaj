@@ -40,7 +40,7 @@
 <script>
 import update from "@/mixins/update";
 export default {
-  name: "Update",
+  name: "HomeUpdate",
   mixins: [update],
 };
 </script>
@@ -51,7 +51,7 @@ export default {
   z-index: 2;
 }
 
-.btn-primary:focus{
+.btn-primary:focus {
   box-shadow: none;
 }
 </style>

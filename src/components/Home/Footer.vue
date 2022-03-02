@@ -3,7 +3,11 @@
     <div class="container">
       <div class="grid fs-cust">
         <div class="grid-3">
-          <img src="/img/aaj-files/aaj-logo.png" class="rounded mb-2" alt="AAJ-Express" />
+          <img
+            src="/img/aaj-files/aaj-logo.png"
+            class="rounded mb-2"
+            alt="AAJ-Express"
+          />
 
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -73,7 +77,7 @@
 </template>
 
 <script>
-export default {};
+export default { name: "HomeFooter" };
 </script>
 
 <style scoped>

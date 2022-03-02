@@ -64,7 +64,7 @@
 </template>
 
 <script>
-export default {};
+export default { name: "HomeEstimate" };
 </script>
 
 <style scoped>

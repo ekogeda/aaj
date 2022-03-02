@@ -1,12 +1,13 @@
 <template>
   <div class="dashboard position-absolute start-0 end-0 h-100 overflow-auto">
     <div class="container-fluid">
+      <Alert message="Welcome to AAJ" :isAlert="isAlert" />
       <Sidebar />
 
       <main :class="[isBigScreen ? 'big-screen' : 'small-screen']" id="main">
         <div class="container">
           <div class="card my-4 border-0 card-custom">
-            <div class="card-body">
+            <div class="card-body px-sm-custom">
               <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                   <button
@@ -147,24 +148,6 @@
                   </div>
                 </div>
 
-                <!-- <div class="col-lg-3 col-md-6">
-                  <div class="card shadow border-0 h-100">
-                    <div
-                      class="card-body d-flex justify-content-between align-items-center"
-                    >
-                      <div class="text">
-                        <p class="card-text text-secondary">Process</p>
-                        <h6 class="card-title">{{ transactions.status.pending}}</h6>
-                      </div>
-                      <img
-                        src="/img/aaj-files/comp2.png"
-                        class="img-fluid"
-                        alt="components"
-                      />
-                    </div>
-                  </div>
-                </div> -->
-
                 <div class="col-lg-4 col-md-4">
                   <div class="card shadow border-0 h-100">
                     <div
@@ -208,29 +191,42 @@
 
               <div class="row g-3 my-4">
                 <div class="col-md-7 col-sm-12">
-                  <div class="card shadow border-0 h-100">
-                    <div class="card-body">
+                  <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body px-0">
                       <h5 class="card-title">Transactions</h5>
-                      <apexchart
-                        width="100%"
-                        height="350"
-                        type="bar"
-                        :options="options"
-                        :series="series"
-                      ></apexchart>
+                      <BarChart
+                        name="Transactions"
+                        :stats="transactions.stats"
+                      />
                     </div>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-12">
-                  <div class="card shadow border-0 h-100">
-                    <div class="card-body">
+                  <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body pb-0">
                       <div
                         class="d-flex justify-content-between align-items-center mb-4"
                       >
                         <h5 class="card-title mb-0">Recent shipments</h5>
-                        <router-link :to="{ name: 'user.order' }"
-                          >View all</router-link
+                        <router-link
+                          :to="{ name: 'Track' }"
+                          class="p-1 badge text-light bg-aaj text-decoration-none"
                         >
+                          Track
+                        </router-link>
+                      </div>
+
+                      <div
+                        class="toast border-0 m-auto"
+                        :class="{ fade: copySucceeded, show: copySucceeded }"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                        style="font-size: 0.7rem; width: 80px"
+                      >
+                        <div class="toast-body text-center p-2">
+                          <span class="text-muted"> Copied! </span>
+                        </div>
                       </div>
 
                       <div class="table-responsive">
@@ -243,9 +239,17 @@
                               <th scope="col">Tracking ID</th>
                               <th scope="col">Requested</th>
                               <th scope="col">Status</th>
-                              <th scope="col">Action</th>
                             </tr>
                           </thead>
+                          <tfoot class="bg-light">
+                            <tr>
+                              <td colspan="5" class="text-center">
+                                <router-link :to="{ name: 'user.order' }"
+                                  >more <i class="bi bi-arrow-right"></i
+                                ></router-link>
+                              </td>
+                            </tr>
+                          </tfoot>
                           <tbody>
                             <tr
                               v-for="(trans, index) in transactions.transact"
@@ -260,58 +264,60 @@
                                   v-clipboard:success="onCopyStatus"
                                   v-clipboard:error="onCopyError"
                                 >
-                                  <i class="bi bi-clipboard">{{
-                                    trans.waybill_no
-                                  }}</i>
+                                  {{ trans.waybill_no }}
                                 </a>
-                                <span
-                                  class="text-muted"
-                                  v-if="copySucceeded == true"
-                                  >Copied!</span
-                                >
-                                <span
-                                  class="text-muted"
-                                  v-if="copySucceeded == false"
-                                >
-                                  Press CTRL+C to copy.
-                                </span>
                               </td>
                               <td>{{ formatDate(trans.created_at) }}</td>
                               <td>
                                 <span v-switch="trans.status" class="fw-normal">
+                                  <span
+                                    class="p-1 badge text-light bg-primary"
+                                    v-case="'0'"
+                                  >
+                                    New
+                                  </span>
+
                                   <span
                                     class="p-1 badge text-light bg-warning"
                                     v-case="'1'"
                                   >
                                     Pending
                                   </span>
+
                                   <span
                                     class="p-1 badge text-light bg-aaj"
                                     v-case="'4'"
                                   >
                                     In-progress
                                   </span>
+
                                   <span
-                                    class="p-1 badge text-light delivered"
+                                    class="p-1 badge text-light bg-info"
+                                    v-case="'5'"
+                                  >
+                                    Not Available
+                                  </span>
+
+                                  <span
+                                    class="p-1 badge text-light bg-danger"
+                                    v-case="'6'"
+                                  >
+                                    Cancelled
+                                  </span>
+
+                                  <span
+                                    class="p-1 badge text-light bg-dark"
+                                    v-case="'7'"
+                                  >
+                                    Returned
+                                  </span>
+                                  <span
+                                    class="p-1 badge text-light bg-success"
                                     v-case="'9'"
                                   >
                                     Delivered
                                   </span>
-                                  <span
-                                    class="p-1 badge text-light bg-secondary"
-                                    v-case="'4'"
-                                  >
-                                    Cancelled
-                                  </span>
                                 </span>
-                              </td>
-                              <td>
-                                <router-link
-                                  :to="{ name: 'Track' }"
-                                  class="p-1 badge text-light bg-aaj text-decoration-none"
-                                >
-                                  Track
-                                </router-link>
                               </td>
                             </tr>
                           </tbody>
@@ -322,39 +328,36 @@
                 </div>
 
                 <div class="container">
-                  <div class="card border-0 shadow">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-7 col-sm-12 mt-5">
+                  <div class="row g-3">
+                    <div class="col-md-7 col-sm-12">
+                      <div class="card border-0 shadow-sm">
+                        <div class="card-body px-0">
                           <div class="row">
                             <div class="col-md-6">
-                              <apexchart
-                                type="radialBar"
-                                width="100%"
-                                :options="chartOptionsR1"
-                                :series="seriesR1"
-                              ></apexchart>
+                              <RadialChart
+                                name="Paid Bills"
+                                color="#00B140"
+                                :stats="transactions.status.delivered"
+                              />
                             </div>
                             <div class="col-md-6">
-                              <apexchart
-                                type="radialBar"
-                                width="100%"
-                                :options="chartOptionsR2"
-                                :series="seriesR2"
-                              ></apexchart>
+                              <RadialChart
+                                name="On-Route"
+                                color="#FE6802"
+                                :stats="transactions.status.shipped"
+                              />
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
 
-                        <div class="col-md-5 col-sm-12">
-                          <div class="h-100 w-100">
-                            <h5 class="card-title">Statistics</h5>
-                            <apexchart
-                              class="w-custom"
-                              type="donut"
-                              :options="chartOptions"
-                              :series="seriesD"
-                            ></apexchart>
+                    <div class="col-md-5 col-sm-12">
+                      <div class="card border-0 shadow-sm">
+                        <div class="card-body px-0">
+                          <div class="h-100 w-100" style="min-width: 230px">
+                            <h5 class="card-title ps-2">Statistics</h5>
+                            <PieChart :stats="transactions.status" />
                           </div>
                         </div>
                       </div>
@@ -373,129 +376,23 @@
 <script>
 import Sidebar from "@/components/Users/Sidebar.vue";
 import moment from "moment";
+import Alert from "@/components/Alert.vue";
+import BarChart from "@/components/Chart/BarChart.vue";
+import RadialChart from "@/components/Chart/RadialChart.vue";
+import PieChart from "@/components/Chart/PieChart.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "UserDashboard",
 
-  components: { Sidebar },
+  components: { Alert, Sidebar, BarChart, RadialChart, PieChart },
 
   data() {
     return {
-      copySucceeded: null,
-      series: [
-        {
-          name: "Transactions",
-          data: [30, 40, 45, 50, 49, 60, 70, 91, 45, 22, 18, 95],
-        },
-      ],
-      options: {
-        legend: {
-          show: false,
-        },
-        chart: {
-          id: "basic-bar",
-        },
-        dataLabels: {
-          enabled: true,
-        },
-        plotOptions: {
-          bar: {
-            distributed: true,
-          },
-        },
-
-        labels: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-      },
-
-      statusD: null,
-      seriesD: [30, 40, 45],
-      chartOptions: {
-        legend: {
-          show: true,
-          position: "left",
-          horizontalAlign: "center",
-        },
-        plotOptions: {
-          pie: {
-            startAngle: 0,
-            endAngle: 360,
-            expandOnClick: true,
-            donut: {
-              labels: {
-                show: true,
-                name: {
-                  show: true,
-                  offsetY: -10,
-                  formatter: function (val) {
-                    return val;
-                  },
-                },
-                value: {
-                  show: true,
-                  fontWeight: 700,
-                  offsetY: 5,
-                  formatter: function (val) {
-                    return val + "%";
-                  },
-                },
-              },
-            },
-          },
-        },
-        colors: ["#FE6802", "#00B140", "#F90005"],
-        labels: ["Pending", "Delivered", "Cancelled"],
-      },
-
-      statusR1: null,
-      seriesR1: [70],
-      chartOptionsR1: {
-        chart: {
-          type: "radialBar",
-        },
-        colors: ["#00B140"],
-        plotOptions: {
-          radialBar: {
-            hollow: {
-              size: "60%",
-            },
-          },
-        },
-        labels: ["Paid Bills"],
-      },
-
-      statusR2: null,
-      seriesR2: [20],
-      chartOptionsR2: {
-        chart: {
-          type: "radialBar",
-        },
-        colors: ["#FE6802"],
-        plotOptions: {
-          radialBar: {
-            hollow: {
-              size: "60%",
-            },
-          },
-        },
-        labels: ["On-Route"],
-      },
-
       isBigScreen: false,
       isSmallScreen: false,
+      copySucceeded: null,
+      isAlert: false,
     };
   },
 
@@ -515,38 +412,6 @@ export default {
   methods: {
     ...mapActions("auth", ["logoutUser"]),
     ...mapActions("transaction", ["getTransactions"]),
-
-    updateBarChart() {
-      const max = 90;
-      const min = 20;
-      const newData = this.series[0].data.map(() => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      });
-      this.series = [
-        {
-          data: newData,
-        },
-      ];
-    },
-
-    updatePieChart() {
-      this.statusD = [
-        this.transactions.status.pending,
-        this.transactions.status.delivered,
-        this.transactions.status.cancelled,
-      ];
-      this.seriesD = this.statusD.map((status) => status);
-    },
-
-    updateRadialR1() {
-      this.statusR1 = [this.transactions.status.delivered];
-      this.seriesR1 = this.statusR1.map((status) => status);
-    },
-
-    updateRadialR2() {
-      this.statusR2 = [this.transactions.status.pending];
-      this.seriesR2 = this.statusR2.map((status) => status);
-    },
 
     formatDate: function (params) {
       return moment(params).format("MMM. Do, YYYY");
@@ -578,11 +443,9 @@ export default {
   },
 
   created() {
-    this.getTransactions(this.user.id);
-    this.updateBarChart();
-    this.updatePieChart();
-    this.updateRadialR1();
-    this.updateRadialR2();
+    setTimeout(() => {
+      this.getTransactions(this.user.id);
+    }, 3000);
   },
 };
 </script>
@@ -704,6 +567,11 @@ export default {
     padding-left: 0;
   }
 
+  .px-sm-custom {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+  }
+
   .big-screen {
     padding-left: 0;
   }
@@ -713,9 +581,13 @@ export default {
   }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 576px) {
   .big-screen {
     padding-left: 15rem;
+  }
+  .px-sm-custom {
+    padding-right: 1.25rem !important;
+    padding-left: 1.25rem !important;
   }
 }
 

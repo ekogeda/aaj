@@ -131,12 +131,7 @@
 
                     <div v-if="form.shipment == 2">
                       <div
-                        class="
-                          animate__animated animate__fadeIn
-                          my-4
-                          bg-light
-                          p-2
-                        "
+                        class="animate__animated animate__fadeIn my-4 bg-light p-2"
                       >
                         <div class="form-check">
                           <label class="form-check-label">
@@ -426,7 +421,7 @@ import { mapGetters, mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "Rate",
+  name: "GetRate",
   components: { Modal },
   data() {
     return {

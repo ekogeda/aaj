@@ -68,7 +68,7 @@ import { mapGetters, mapActions } from "vuex";
 import Paystack from "vue-paystack";
 
 export default {
-  name: "Payment",
+  name: "MakePayment",
   components: { Paystack },
 
   data() {

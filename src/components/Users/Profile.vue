@@ -22,12 +22,7 @@
                   <a class="navbar-brand" href="#">Profile</a>
 
                   <button
-                    class="
-                      btn btn-outline-primary
-                      shadow-none
-                      border-0
-                      d-lg-none
-                    "
+                    class="btn btn-outline-primary shadow-none border-0 d-lg-none"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#dashboardSide"
@@ -90,12 +85,7 @@
                       <li class="nav-item me-3">
                         <router-link
                           :to="{ name: 'user.profile' }"
-                          class="
-                            nav-link
-                            d-flex
-                            justify-content-center
-                            align-items-center
-                          "
+                          class="nav-link d-flex justify-content-center align-items-center"
                           exact
                         >
                           <img
@@ -115,14 +105,7 @@
                 <div class="col-lg-8 col-md-12 m-auto">
                   <div class="card border-radius shadow border-0">
                     <div
-                      class="
-                        card-header
-                        border-radius border-0
-                        bg-white
-                        d-flex
-                        justify-content-between
-                        align-items-center
-                      "
+                      class="card-header border-radius border-0 bg-white d-flex justify-content-between align-items-center"
                     >
                       <h5 class="fw-normal mb-0">Edit Profile</h5>
                       <p class="text-muted mb-0">
@@ -238,14 +221,7 @@
                         </div>
 
                         <button
-                          class="
-                            btn btn-sm btn-primary
-                            d-block
-                            m-auto
-                            my-3
-                            border-radius
-                            btn-update
-                          "
+                          class="btn btn-sm btn-primary d-block m-auto my-3 border-radius btn-update"
                         >
                           Update
                         </button>
@@ -266,7 +242,7 @@
 import Sidebar from "@/components/Users/Sidebar.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "Profile",
+  name: "UserProfile",
 
   components: { Sidebar },
 

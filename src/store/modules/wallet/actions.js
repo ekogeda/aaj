@@ -27,7 +27,10 @@ export const getWallet = ({ commit }, cId) => {
 export const updateWallet = ({ commit, dispatch }, payload) => {
   Wallet.update(payload)
     .then((response) => {
-      commit("SET_WALLET", response.data.data);
+      commit("SET_WALLET", {
+        data: response.data.data,
+        total: response.data.total,
+      });
       router.push({ name: "user.wallet" });
       dispatch(
         "addNotification",

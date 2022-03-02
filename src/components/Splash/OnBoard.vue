@@ -17,15 +17,7 @@
 
           <div class="on-board-bottom w-100">
             <button
-              class="
-                btn btn-primary
-                fw-bold
-                w-75
-                d-block
-                m-auto
-                mb-3
-                text-capitalize
-              "
+              class="btn btn-primary fw-bold w-75 d-block m-auto mb-3 text-capitalize"
               @click.prevent="next()"
             >
               Next
@@ -52,15 +44,7 @@
 
           <div class="on-board-bottom w-100">
             <button
-              class="
-                btn btn-primary
-                fw-bold
-                w-75
-                d-block
-                m-auto
-                mb-3
-                text-capitalize
-              "
+              class="btn btn-primary fw-bold w-75 d-block m-auto mb-3 text-capitalize"
               @click.prevent="next()"
             >
               Next
@@ -87,15 +71,7 @@
 
           <div class="on-board-bottom w-100">
             <button
-              class="
-                btn btn-primary
-                fw-bold
-                w-75
-                d-block
-                m-auto
-                mb-3
-                text-capitalize
-              "
+              class="btn btn-primary fw-bold w-75 d-block m-auto mb-3 text-capitalize"
               @click.prevent="next('skip')"
             >
               Get started
@@ -110,7 +86,7 @@
 <script>
 import LoadingScreen from "@/components/LoadingScreen";
 export default {
-  name: "Splash",
+  name: "HomeSplash",
 
   components: { LoadingScreen },
 
@@ -174,7 +150,7 @@ export default {
   border-radius: 15px;
 }
 
-.btn-primary:focus{
+.btn-primary:focus {
   box-shadow: none;
 }
 

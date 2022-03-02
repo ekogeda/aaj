@@ -18,7 +18,7 @@
 
 <script scoped>
 export default {
-  name: "Notfound",
+  name: "NotFound",
 };
 </script>
 

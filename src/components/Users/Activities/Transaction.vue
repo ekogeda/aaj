@@ -764,8 +764,7 @@
                 <div class="summary grid-sm grid-md my-3">
                   <details>
                     <summary>
-                      <span
-                        class="border-0 border-danger border-bottom"
+                      <span class="border-0 border-danger border-bottom"
                         >Origin</span
                       >
                     </summary>
@@ -799,8 +798,7 @@
 
                   <details>
                     <summary>
-                      <span
-                        class="border-0 border-danger border-bottom"
+                      <span class="border-0 border-danger border-bottom"
                         >Destination</span
                       >
                     </summary>

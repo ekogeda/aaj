@@ -30,6 +30,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
+  name: "HomeHeader",
   computed: {
     ...mapGetters({
       authenticated: "auth/authenticated",

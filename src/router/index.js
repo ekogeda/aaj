@@ -17,7 +17,7 @@ const CustomerTransaction = () =>
     /* webpackChunkName: "customer-transaction" */ "@/components/Users/Activities/Transaction.vue"
   );
 
-const Rate = () =>
+const GetRate = () =>
   import(
     /* webpackChunkName: "rate" */ "@/components/Users/Activities/Rate.vue"
   );
@@ -35,7 +35,7 @@ const TopUpWallet = () =>
     /* webpackChunkName: "top-up-wallet" */ "@/components/Users/Activities/TopUpWallet.vue"
   );
 
-const Login = () =>
+const UserLogin = () =>
   import(/* webpackChunkName: "login" */ "@/components/Auth/Login.vue");
 
 const Signup = () =>
@@ -56,15 +56,15 @@ const VerifyAccount = () =>
     /* webpackChunkName: "verify-account" */ "@/components/Auth/VerifyAccount.vue"
   );
 
-const Profile = () =>
+const UserProfile = () =>
   import(/* webpackChunkName: "profile" */ "@/components/Users/Profile.vue");
 
-const Track = () =>
+const OrderTrack = () =>
   import(
     /* webpackChunkName: "track" */ "@/components/Users/Activities/Track.vue"
   );
 
-const Setting = () =>
+const UserSetting = () =>
   import(/* webpackChunkName: "setting" */ "@/components/Users/Setting.vue");
 
 Vue.use(VueRouter);
@@ -75,7 +75,7 @@ const routes = [
     name: "Home",
     component: Home,
     meta: {
-      title: "Home | AAJExpress",
+      title: "AAJExpress | Trusted Logistics Service Provider",
       metaTags: [
         {
           name: "description",
@@ -125,7 +125,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: UserLogin,
     meta: {
       title: "Login | AAJExpress",
       transitionName: "fade",
@@ -205,7 +205,7 @@ const routes = [
   {
     path: "/track",
     name: "Track",
-    component: Track,
+    component: OrderTrack,
     meta: {
       title: "Track | AAJExpress",
       transitionName: "fade",
@@ -280,7 +280,7 @@ const routes = [
       {
         path: "rate",
         name: "user.rate",
-        component: Rate,
+        component: GetRate,
         meta: {
           title: "Rate | AAJExpress",
           transitionName: "fade",
@@ -356,7 +356,7 @@ const routes = [
       {
         path: "profile",
         name: "user.profile",
-        component: Profile,
+        component: UserProfile,
         meta: {
           title: "Profile | AAJExpress",
           transitionName: "fade",
@@ -375,7 +375,7 @@ const routes = [
       {
         path: "setting",
         name: "user.setting",
-        component: Setting,
+        component: UserSetting,
         meta: {
           title: "Setting | AAJExpress",
           transitionName: "fade",

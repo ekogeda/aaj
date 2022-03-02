@@ -13,7 +13,7 @@ module.exports = {
     "vue/multi-word-component-names": [
       "error",
       {
-        ignores: ["User", "Order", "apexchart"],
+        ignores: ["Sidebar", "User", "Order", "apexchart"],
       },
     ],
   },

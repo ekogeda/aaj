@@ -235,8 +235,7 @@
 </template>
 
 <script>
-export default {
-};
+export default { name: "HomeFaq" };
 </script>
 
 <style scoped>

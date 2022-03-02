@@ -224,13 +224,7 @@
                     </div>
 
                     <div
-                      class="
-                        d-flex
-                        justify-content-between
-                        align-items-center
-                        fs-sm
-                        mb-3
-                      "
+                      class="d-flex justify-content-between align-items-center fs-sm mb-3"
                     >
                       <div class="form-check">
                         <input
@@ -290,7 +284,7 @@ import { mapActions, mapState } from "vuex";
 import { required, email } from "vuelidate/lib/validators";
 
 export default {
-  name: "Login",
+  name: "UserLogin",
   components: { Navbar, Footer },
 
   data() {

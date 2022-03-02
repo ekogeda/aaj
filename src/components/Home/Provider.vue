@@ -15,11 +15,7 @@
             <div class="card mb-4 p-3 border-0 hoverable shadow">
               <div class="card-body">
                 <!-- <i class="fa fa-map-marker fa-3x text-aaj"></i> -->
-                <img
-                  src="@/assets/marker.png"
-                  width="60px"
-                  alt="map-marker"
-                />
+                <img src="@/assets/marker.png" width="60px" alt="map-marker" />
                 <h5 class="my-4">Personal</h5>
                 <p>
                   We are here for the simple things. Use AAJExpress for one-off
@@ -34,11 +30,7 @@
             <div class="card mb-4 p-3 border-0 hoverable shadow">
               <div class="card-body">
                 <!-- <i class="fa fa-map-marker fa-3x text-aaj"></i> -->
-                <img
-                  src="@/assets/cart.png"
-                  width="60px"
-                  alt="map-marker"
-                />
+                <img src="@/assets/cart.png" width="60px" alt="map-marker" />
                 <h5 class="my-4">Online, offline &amp; Social Sellers</h5>
                 <p>
                   Do you own your own physical store, e-commerce website or you
@@ -53,11 +45,7 @@
             <div class="card mb-4 p-3 border-0 hoverable shadow">
               <div class="card-body">
                 <!-- <i class="fa fa-map-marker fa-3x text-aaj"></i> -->
-                <img
-                  src="@/assets/bag.png"
-                  width="60px"
-                  alt="map-marker"
-                />
+                <img src="@/assets/bag.png" width="60px" alt="map-marker" />
                 <h5 class="my-4">Retailers &amp; Brands</h5>
                 <p>
                   Increase visibility and distribution for your products and
@@ -72,11 +60,7 @@
             <div class="card mb-4 p-3 border-0 hoverable shadow">
               <div class="card-body">
                 <!-- <i class="fa fa-map-marker fa-3x text-aaj"></i> -->
-                <img
-                  src="@/assets/globe-b.png"
-                  width="60px"
-                  alt="map-marker"
-                />
+                <img src="@/assets/globe-b.png" width="60px" alt="map-marker" />
                 <h5 class="my-4">Couriers</h5>
                 <p>
                   Improve your operations and sales by working with us. You can
@@ -90,11 +74,7 @@
             <div class="card mb-4 p-3 border-0 hoverable shadow">
               <div class="card-body">
                 <!-- <i class="fa fa-map-marker fa-3x text-aaj"></i> -->
-                <img
-                  src="@/assets/chimney.png"
-                  width="60px"
-                  alt="map-marker"
-                />
+                <img src="@/assets/chimney.png" width="60px" alt="map-marker" />
                 <h5 class="my-4">Platforms &amp; Market Places</h5>
                 <p>
                   Are you building marketplace that requires payments and
@@ -109,11 +89,7 @@
             <div class="card mb-4 p-3 border-0 hoverable shadow">
               <div class="card-body">
                 <!-- <i class="fa fa-map-marker fa-3x text-aaj"></i> -->
-                <img
-                  src="@/assets/grid-p.png"
-                  width="60px"
-                  alt="map-marker"
-                />
+                <img src="@/assets/grid-p.png" width="60px" alt="map-marker" />
                 <h5 class="my-4">Agents &amp; Franchise Partners</h5>
                 <p>
                   Increase your income and maximize utility of your free space
@@ -150,7 +126,7 @@
 </template>
 
 <script>
-export default {};
+export default { name: "HomeProvider" };
 </script>
 
 <style scoped>
@@ -165,7 +141,7 @@ export default {};
   margin: 0.5rem 0;
 }
 
-.pt-5{
+.pt-5 {
   padding-top: 5rem;
 }
 
@@ -219,7 +195,6 @@ export default {};
   .col-md-8.m-auto img {
     height: auto;
   }
-
 }
 
 @media (min-width: 968px) {
