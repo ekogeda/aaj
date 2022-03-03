@@ -14,25 +14,26 @@ const UserDashboard = () =>
 
 const CustomerTransaction = () =>
   import(
-    /* webpackChunkName: "customer-transaction" */ "@/components/Users/Activities/Transaction.vue"
+    /* webpackChunkName: "transaction" */ "@/components/Transaction/Transaction.vue"
   );
 
 const GetRate = () =>
-  import(
-    /* webpackChunkName: "rate" */ "@/components/Users/Activities/Rate.vue"
-  );
+  import(/* webpackChunkName: "rate" */ "@/components/Transaction/Rate.vue");
+
+const TrackItems = () =>
+  import(/* webpackChunkName: "track" */ "@/components/Transaction/Track.vue");
 
 const UserOrder = () =>
   import(/* webpackChunkName: "order" */ "@/components/Users/Order.vue");
 
 const CustomerWallet = () =>
   import(
-    /* webpackChunkName: "customer-wallet" */ "@/components/Users/Activities/Wallet.vue"
+    /* webpackChunkName: "customer-wallet" */ "@/components/Wallet/Wallet.vue"
   );
 
 const TopUpWallet = () =>
   import(
-    /* webpackChunkName: "top-up-wallet" */ "@/components/Users/Activities/TopUpWallet.vue"
+    /* webpackChunkName: "top-up-wallet" */ "@/components/Wallet/TopUpWallet.vue"
   );
 
 const UserLogin = () =>
@@ -58,11 +59,6 @@ const VerifyAccount = () =>
 
 const UserProfile = () =>
   import(/* webpackChunkName: "profile" */ "@/components/Users/Profile.vue");
-
-const OrderTrack = () =>
-  import(
-    /* webpackChunkName: "track" */ "@/components/Users/Activities/Track.vue"
-  );
 
 const UserSetting = () =>
   import(/* webpackChunkName: "setting" */ "@/components/Users/Setting.vue");
@@ -204,8 +200,8 @@ const routes = [
 
   {
     path: "/track",
-    name: "Track",
-    component: OrderTrack,
+    name: "TrackItems",
+    component: TrackItems,
     meta: {
       title: "Track | AAJExpress",
       transitionName: "fade",
@@ -261,7 +257,6 @@ const routes = [
         path: "transaction",
         name: "user.transaction",
         component: CustomerTransaction,
-        // props: true,
         meta: {
           title: "Transaction | AAJExpress",
           transitionName: "fade",
@@ -335,8 +330,8 @@ const routes = [
         },
       },
       {
-        path: "topupwallet",
-        name: "user.topupwallet",
+        path: "fund-wallet",
+        name: "user.fund-wallet",
         component: TopUpWallet,
         meta: {
           title: "Top Up Wallet | AAJExpress",

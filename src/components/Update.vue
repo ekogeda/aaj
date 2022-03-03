@@ -17,12 +17,6 @@
           />
           <strong class="me-auto">AAJ Express</strong>
           <small class="text-muted">Just now </small>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-          ></button>
         </div>
         <div class="toast-body">An update is available..!</div>
         <button

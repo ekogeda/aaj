@@ -16,8 +16,8 @@
           />
           <div class="carousel-caption d-md-block">
             <h2>
-              Trusted Logistics <br />
-              Service Provider.
+              <span class="text-aaj">Trusted</span> logistics <br />
+              service provider.
             </h2>
             <p class="my-3">
               We offer doorstep delivery not only to all states within <br />
@@ -97,27 +97,53 @@
             </form>
           </div>
         </div>
-        <!-- <div class="carousel-item">
+        <div class="carousel-item bg-light">
           <img
-            src="@/assets/3a.png"
-            class="d-block w-100"
+            src="@/assets/bus-blue.png"
+            width="auto"
+            style="float: right"
             alt="..."
+            class="slide-sm"
           />
           <div class="carousel-caption d-md-block">
-            <h5 class="">
+            <h2>
               <span class="text-aaj">Fast</span> and
-              <span class="text-aaj">reliable</span> deliveries <br />
+              <span class="text-aaj">reliable</span> deliveries
+            </h2>
+            <p class="my-3">
               Improves customer retention.
-            </h5>
-            <p class="">
-              <span class="text-aaj">Fast</span> and
-              <span class="text-aaj">reliable</span> deliveries <br />
-              Improves customer retention.
-              <span class="text-aaj">AAJ Express</span> is here to help with
-              that
+              <span class="text-aaj">AAJ Express</span> is here <br />
+              to help with that
             </p>
+            <form
+              class="form-subscribe"
+              id="trackCargo"
+              data-sb-form-api-token="API_TOKEN"
+            >
+              <div class="row">
+                <div class="col-lg-5 col-md-7 col-sm-12">
+                  <div class="input-group mb-1">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Input tracking ID to track your goods"
+                      aria-label="Input tracking ID to track your goods"
+                      aria-describedby="button-track"
+                    />
+                    <button
+                      class="btn btn-sm btn-primary"
+                      type="button"
+                      id="button-track"
+                    >
+                      Search &#8594;
+                    </button>
+                  </div>
+                  <small class="d-inline-block">Send . Track . Receive</small>
+                </div>
+              </div>
+            </form>
           </div>
-        </div> -->
+        </div>
       </div>
 
       <button

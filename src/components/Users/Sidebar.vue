@@ -53,7 +53,7 @@
 
           <li class="nav-item w-90 mb-2">
             <router-link
-              :to="{ name: 'Track' }"
+              :to="{ name: 'TrackItems' }"
               class="nav-link ps-4 d-flex align-items-center"
               exact
             >

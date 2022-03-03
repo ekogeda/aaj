@@ -209,7 +209,7 @@
                       >
                         <h5 class="card-title mb-0">Recent shipments</h5>
                         <router-link
-                          :to="{ name: 'Track' }"
+                          :to="{ name: 'TrackItems' }"
                           class="p-2 badge text-light bg-aaj text-decoration-none"
                         >
                           Track
